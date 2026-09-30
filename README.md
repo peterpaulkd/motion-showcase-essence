@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Motion Masterpiece
+
+Now make sure you have things done with figma motion like the today modern websites and then also light theme classy not things that make it seem vibe coded so make a legendary thing that I can showcase and also say lovable does this then get more references and the best of the best figma motion present especially in the hero section and also animations nice ones
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://motion-showcase-essence.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/759010a9-385d-4fa6-9894-152e697b736f).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
