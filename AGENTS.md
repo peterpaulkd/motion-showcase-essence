@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture decisions
+
+- Use small local UI primitives for shared interactive controls so the PPA visual language stays consistent.
