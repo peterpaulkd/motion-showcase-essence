@@ -180,11 +180,72 @@
   100% { transform: translateX(520%); opacity: 0; }
 }
 
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes reveal-left {
+  from { opacity: 0; transform: translateX(-28px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float-badge {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.68 0.085 137 / 0.5); }
+  50% { box-shadow: 0 0 0 6px oklch(0.68 0.085 137 / 0); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 @utility anim-rise { animation: rise 0.75s cubic-bezier(0.2, 0.7, 0, 1) both; }
 @utility map-route { stroke-dasharray: 1100; animation: draw-route 2.6s cubic-bezier(0.4, 0, 0.2, 1) 0.35s both; }
 @utility plot-in { animation: plot-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 @utility scan-line { animation: scan 6s ease-in-out infinite; }
+@utility float-badge { animation: float-badge 4s ease-in-out infinite; }
+@utility pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0, 1);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.stagger-1 { transition-delay: 0ms; }
+.stagger-2 { transition-delay: 80ms; }
+.stagger-3 { transition-delay: 160ms; }
+.stagger-4 { transition-delay: 240ms; }
+.stagger-5 { transition-delay: 320ms; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  .reveal, .reveal-left { opacity: 1; transform: none; transition: none; }
 }
