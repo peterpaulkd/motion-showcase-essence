@@ -3,8 +3,8 @@ import { ArrowDownRight, ArrowUpRight, Calendar, Lock, MapPin, Menu, Plus, Uploa
 import { type ChangeEvent, useRef, useState } from "react";
 
 import cabinetImage from "@/assets/ppa-cabinet.jpg";
-import districtImage from "@/assets/ppa-district.jpg";
-import mapImage from "@/assets/ppa-survey-map.jpg";
+import districtImage from "https://res.cloudinary.com/dusjc6i7k/image/upload/v1791293648/activity1_yvzm0f.jpg";
+import mapImage from "https://res.cloudinary.com/dusjc6i7k/image/upload/v1791293648/activity2_ljstnn.jpg";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -178,7 +178,7 @@ function Index() {
             <div className="lg:col-span-7">
               <p className="text-[11px] font-bold uppercase text-terracotta">(a) About the association</p>
               <h2 className="mt-4 max-w-[20ch] font-display text-4xl font-bold leading-tight">A coherent future, planned layer by layer.</h2>
-              <p className="mt-5 max-w-[60ch] leading-7 text-foreground/70">The Physical Planning Association (PPA) is the student chapter of the Institute of Survey and Land Management (ISLM). We are a community of emerging spatial planners, GIS analysts, and urban development practitioners committed to shaping resilient, inclusive, and sustainable communities across Kenya and East Africa.</p>
+              <p className="mt-5 max-w-[60ch] leading-7 text-foreground/70">The Physical Planning Association (PPA) is the student chapter of the Institute of Survey and Land Management (ISLM). We are a community of emerging spatial planners, GIS analysts, and urban development practitioners committed to shaping resilient, inclusive, and sustainable communities across Uganda and East Africa.</p>
               <p className="mt-4 max-w-[60ch] leading-7 text-foreground/70">Founded to bridge the gap between academic theory and real-world practice, PPA organises field mapping drives, symposia, workshops, and community engagement programmes. Our members gain hands-on experience in land-use planning, cadastral surveying, environmental impact assessment, and participatory community planning.</p>
               <p className="mt-4 max-w-[60ch] leading-7 text-foreground/70">We collaborate with county governments, NGOs, and international planning bodies to deliver projects that matter — from informal settlement upgrading to green corridor design and urban mobility studies.</p>
             </div>
@@ -187,7 +187,7 @@ function Index() {
               <div className="bg-paper p-6"><span className="text-[10px] uppercase text-foreground/45">Method</span><p className="mt-2 font-display text-lg font-semibold">Observe. Map. Convene. Act.</p></div>
               <div className="bg-paper p-6"><span className="text-[10px] uppercase text-foreground/45">Focus areas</span><p className="mt-2 font-display text-lg font-semibold">GIS · Land use · Urban design · Policy</p></div>
               <div className="bg-paper p-6"><span className="text-[10px] uppercase text-foreground/45">Established</span><p className="mt-2 font-display text-lg font-semibold">ISLM Student Chapter · 2019</p></div>
-              <div className="bg-paper p-6 sm:col-span-2"><span className="text-[10px] uppercase text-foreground/45">Affiliation</span><p className="mt-2 font-display text-lg font-semibold">Institute of Survey and Land Management, Kenya Physical Planners Registration Board (KPPRB)</p></div>
+              <div className="bg-paper p-6 sm:col-span-2"><span className="text-[10px] uppercase text-foreground/45">Affiliation</span><p className="mt-2 font-display text-lg font-semibold">Institute of Survey and Land Management, Uganda Physical Planners Registration Board (KPPRB)</p></div>
             </div>
           </div>
         </section>
