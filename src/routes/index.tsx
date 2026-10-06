@@ -309,12 +309,12 @@ function Index() {
           </div>
           <div className="grid gap-5 md:grid-cols-12">
             <figure className="reveal stagger-2 group relative overflow-hidden rounded-lg md:col-span-7">
-              <img src={districtImage} alt="Planned district with green public corridors" width={1024} height={768} loading="lazy" className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"/>
+              <img src="https://res.cloudinary.com/dusjc6i7k/image/upload/v1791293648/activity1_yvzm0f.jpg" alt="Planned district with green public corridors" width={1024} height={768} loading="lazy" className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"/>
               <figcaption className="absolute inset-x-0 bottom-0 translate-y-1 bg-primary/85 p-5 text-primary-foreground backdrop-blur transition-transform duration-300 group-hover:translate-y-0"><span className="text-[10px] uppercase">Field Activity 01</span>
               <p className="mt-1 font-display text-lg font-semibold">Clean neighbourhood and keeping public natural green</p></figcaption>
             </figure>
             <figure className="reveal stagger-3 group relative overflow-hidden rounded-lg md:col-span-5">
-              <img src={mapImage} alt="Urban planning survey map on a work table" width={1024} height={768} loading="lazy" className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"/>
+              <img src="https://res.cloudinary.com/dusjc6i7k/image/upload/v1791293648/activity2_ljstnn.jpg" alt="Urban planning survey map on a work table" width={1024} height={768} loading="lazy" className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"/>
               <figcaption className="absolute inset-x-0 bottom-0 translate-y-1 bg-background/90 p-5 backdrop-blur transition-transform duration-300 group-hover:translate-y-0"><span className="text-[10px] uppercase text-foreground/50">National Cleaning Day</span>
               <p className="mt-1 font-display text-lg font-semibold">From contours to community</p></figcaption>
             </figure>
