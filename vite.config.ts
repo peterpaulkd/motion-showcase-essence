@@ -13,6 +13,7 @@ import tailwindcss from "@tailwindcss/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  base: "/motion-showcase-essence/",
+  
   plugins: [react(), tailwindcss(), tsconfigPaths()],
+  base: "/motion-showcase-essence/",
 });
