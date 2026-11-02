@@ -10,7 +10,8 @@ export const Route = createFileRoute("/admin/login")({
 });
 
 function AdminLogin() {
-  const { login, isAuthenticated } = useAuth();
+  // const { login, isAuthenticated } = useAuth(); //replace
+  const { demoLogin, isAuthenticated } = useAuth(); //demo login for testing purposes only
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -32,7 +33,7 @@ function AdminLogin() {
     setError("");
     setLoading(true);
     try {
-      await login(email, password);
+      await demoLogin();
       navigate({ to: "/admin" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
@@ -90,68 +91,46 @@ function AdminLogin() {
                 </p>
               </div>
 
-              <form onSubmit={handleLogin} className="grid gap-4">
+              {/* <form onSubmit={handleLogin} className="grid gap-4">
                 {/* Email */}
-                <div>
-                  <label className="mb-1.5 block text-xs font-semibold uppercase text-foreground/50">
-                    Email address
-                  </label>
-                  <div className="relative">
-                    <Mail
-                      size={14}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/40"
-                    />
-                    <input
-                      type="email"
-                      required
-                      autoComplete="username"
-                      placeholder="admin@islm.ac.ke"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="h-11 w-full rounded-md border border-border bg-background pl-9 pr-3 text-sm outline-none transition-colors focus:border-primary"
-                    />
-                  </div>
-                </div>
+              <div className="grid gap-4">
 
-                {/* Password */}
-                <div>
-                  <label className="mb-1.5 block text-xs font-semibold uppercase text-foreground/50">
-                    Password
-                  </label>
-                  <div className="relative">
-                    <Lock
-                      size={14}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/40"
-                    />
-                    <input
-                      type="password"
-                      required
-                      autoComplete="current-password"
-                      placeholder="••••••••"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="h-11 w-full rounded-md border border-border bg-background pl-9 pr-3 text-sm outline-none transition-colors focus:border-primary"
-                    />
-                  </div>
-                </div>
+  {error && (
+    <div className="flex items-center gap-2 rounded-md border border-destructive/30 bg-destructive/5 px-3 py-2.5 text-sm text-destructive">
+      <AlertCircle size={14} />
+      {error}
+    </div>
+  )}
 
-                {/* Error */}
-                {error && (
-                  <div className="flex items-center gap-2 rounded-md border border-destructive/30 bg-destructive/5 px-3 py-2.5 text-sm text-destructive">
-                    <AlertCircle size={14} className="shrink-0" />
-                    {error}
-                  </div>
-                )}
+  <Button
+    type="button"
+    className="mt-1 h-11 w-full"
+    disabled={loading}
+    onClick={() => {
+      try {
+        setLoading(true);
+        demoLogin();
+        navigate({ to: "/admin" });
+      } catch (err) {
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Unable to open dashboard"
+        );
+      } finally {
+        setLoading(false);
+      }
+    }}
+  >
+    {loading ? "Opening dashboard..." : "Enter Admin Panel"}
+    <ArrowRight size={15} className="ml-1" />
+  </Button>
 
-                <Button
-                  type="submit"
-                  className="mt-1 h-11 w-full"
-                  disabled={loading}
-                >
-                  {loading ? "Signing in…" : "Sign in"}
-                  {!loading && <ArrowRight size={15} className="ml-1" />}
-                </Button>
-              </form>
+  <p className="text-center text-xs text-foreground/45">
+    Temporary administrator preview access
+  </p>
+
+</div>
 
               <button
                 type="button"
@@ -228,3 +207,4 @@ function AdminLogin() {
     </div>
   );
 }
+

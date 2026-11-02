@@ -579,6 +579,19 @@ function Index() {
               </ul>
             </div>
 
+            {/* link to admin panel */}
+            <div className="mt-6 border-t border-border/30 pt-4 text-center">
+
+  <a
+     href={`${import.meta.env.BASE_URL}admin/login`}
+    className="inline-flex items-center gap-2 text-xs text-foreground/50 transition-colors hover:text-primary"
+  >
+    <Lock size={13} />
+    Admin Panel
+  </a>
+
+</div>
+
             {/* Association */}
             <div>
               <p className="text-[10px] font-bold uppercase text-foreground/40">Association</p>
