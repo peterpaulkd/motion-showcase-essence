@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDownRight, ArrowUpRight, Calendar, Github, Globe, Instagram, Lock, Mail, MapPin, Menu, Pencil, Plus, Trash2, Upload, X } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Calendar, ChevronDown, ChevronUp, Github, Globe, Instagram, Lock, Mail, MapPin, Menu, Pencil, Plus, Trash2, Upload, X } from "lucide-react";
 import { type ChangeEvent, useEffect, useRef, useState } from "react";
+import { useCommittee } from "@/lib/api/hooks";
 
 import cabinetImage from "@/assets/ppa-cabinet.jpg";
 import districtImage from "@/assets/ppa-district.jpg";
@@ -83,6 +84,120 @@ function PlanningCanvas() {
         <span className="float-badge absolute left-[8%] top-[50%] rounded-full border border-border bg-paper/80 px-2.5 py-1 text-[10px] font-semibold text-foreground/60 backdrop-blur-sm">01°17′S · 36°49′E</span>
       </div>
     </div>
+  );
+}
+
+/* ─────────────────────── Cabinet Section ─────────────────────── */
+
+// Fallback members used when the API has no data yet
+const FALLBACK_MEMBERS = [
+  { id: 1, full_name: "Amina Noor", position: "President", bio: "Urban policy & governance", photo_url: null, email: null, order_index: 1, is_active: true },
+  { id: 2, full_name: "Daniel Mwangi", position: "Vice President", bio: "GIS & spatial analytics", photo_url: null, email: null, order_index: 2, is_active: true },
+  { id: 3, full_name: "Wanjiku Kamau", position: "General Secretary", bio: "Community planning", photo_url: null, email: null, order_index: 3, is_active: true },
+];
+
+function CabinetSection() {
+  const { data: apiMembers } = useCommittee();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Use API data if available, else fall back to hardcoded
+  const allMembers = (apiMembers && apiMembers.length > 0 ? apiMembers : FALLBACK_MEMBERS)
+    .filter((m) => m.is_active)
+    .sort((a, b) => a.order_index - b.order_index);
+
+  const topMembers = allMembers.slice(0, 3);
+  const extraMembers = allMembers.slice(3);
+
+  return (
+    <section id="cabinet" className="mx-auto grid max-w-7xl gap-6 px-5 py-18 lg:grid-cols-12 lg:px-8">
+      <div className="reveal reveal-left stagger-1 overflow-hidden rounded-lg lg:col-span-5">
+        <img
+          src={cabinetImage}
+          alt="Physical Planning Association student leaders"
+          width={1024}
+          height={768}
+          loading="lazy"
+          className="h-full min-h-80 w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+        />
+      </div>
+      <div className="reveal stagger-2 flex flex-col justify-between rounded-lg border border-border bg-card p-7 lg:col-span-7">
+        <div>
+          <p className="text-[11px] font-bold uppercase text-terracotta">(b) Governance cabinet</p>
+          <h2 className="mt-3 font-display text-3xl font-bold">The people steering the plan</h2>
+        </div>
+
+        {/* Top 3 members */}
+        <div className="mt-8 divide-y divide-border">
+          {topMembers.map((member, index) => (
+            <div key={member.id} className="grid grid-cols-[2.5rem_auto_1fr] items-center gap-3 py-4">
+              <span className="text-xs text-foreground/40">0{index + 1}</span>
+              <div className="h-10 w-10 overflow-hidden rounded-full bg-secondary ring-2 ring-border shrink-0">
+                {member.photo_url ? (
+                  <img
+                    src={member.photo_url}
+                    alt={member.full_name}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-sm font-bold text-foreground/30">
+                    {member.full_name[0]}
+                  </div>
+                )}
+              </div>
+              <div>
+                <p className="font-semibold">{member.full_name}</p>
+                <p className="text-xs text-terracotta">{member.position}</p>
+                {member.bio && (
+                  <p className="hidden text-xs text-foreground/50 sm:block mt-0.5">{member.bio}</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Dropdown for remaining members */}
+        {extraMembers.length > 0 && (
+          <div className="mt-3 border-t border-border pt-3">
+            <button
+              onClick={() => setDropdownOpen((v) => !v)}
+              className="flex w-full items-center justify-between rounded-md px-2 py-2 text-sm font-semibold text-foreground/60 hover:bg-secondary hover:text-foreground transition-colors"
+              aria-expanded={dropdownOpen}
+            >
+              <span>
+                {dropdownOpen ? "Hide" : "Show"} {extraMembers.length} more member{extraMembers.length > 1 ? "s" : ""}
+              </span>
+              {dropdownOpen ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
+            </button>
+
+            {dropdownOpen && (
+              <div className="mt-2 divide-y divide-border rounded-md border border-border bg-secondary/30">
+                {extraMembers.map((member) => (
+                  <div key={member.id} className="grid grid-cols-[auto_1fr] items-center gap-3 px-3 py-3">
+                    <div className="h-9 w-9 overflow-hidden rounded-full bg-secondary ring-1 ring-border shrink-0">
+                      {member.photo_url ? (
+                        <img
+                          src={member.photo_url}
+                          alt={member.full_name}
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center text-xs font-bold text-foreground/30">
+                          {member.full_name[0]}
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold">{member.full_name}</p>
+                      <p className="text-xs text-terracotta">{member.position}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -239,21 +354,7 @@ function Index() {
         </section>
 
         {/* Cabinet */}
-        <section id="cabinet" className="mx-auto grid max-w-7xl gap-6 px-5 py-18 lg:grid-cols-12 lg:px-8">
-          <div className="reveal reveal-left stagger-1 overflow-hidden rounded-lg lg:col-span-5"><img src={cabinetImage} alt="Physical Planning Association student leaders" width={1024} height={768} loading="lazy" className="h-full min-h-80 w-full object-cover transition-transform duration-700 hover:scale-[1.02]" /></div>
-          <div className="reveal stagger-2 flex flex-col justify-between rounded-lg border border-border bg-card p-7 lg:col-span-7">
-            <div><p className="text-[11px] font-bold uppercase text-terracotta">(b) Governance cabinet</p><h2 className="mt-3 font-display text-3xl font-bold">The people steering the plan</h2></div>
-            <div className="mt-8 divide-y divide-border">
-              {[["Amina Noor", "President", "Urban policy & governance"], ["Daniel Mwangi", "Vice President", "GIS & spatial analytics"], ["Wanjiku Kamau", "General Secretary", "Community planning"]].map(([name, role, focus], index) => (
-                <div key={name} className="grid grid-cols-[2rem_1fr] gap-3 py-4 sm:grid-cols-[2rem_1fr_1fr]">
-                  <span className="text-xs text-foreground/40">0{index + 1}</span>
-                  <div><p className="font-semibold">{name}</p><p className="text-xs text-terracotta">{role}</p></div>
-                  <p className="hidden text-sm text-foreground/55 sm:block">{focus}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <CabinetSection />
 
         {/* Events */}
         <section id="events" className="border-y border-border bg-secondary/35">
