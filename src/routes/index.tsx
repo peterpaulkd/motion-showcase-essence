@@ -216,11 +216,34 @@ function Index() {
   const [uploadCaption, setUploadCaption] = useState("");
   const [uploadTag, setUploadTag] = useState("");
   const [uploadPreview, setUploadPreview] = useState<string | null>(null);
-  // const [gallery, setGallery] = useState<GalleryPhoto[]>([]);
+  const [localGallery, setGallery] = useState<{ id: number; image_url: string; caption: string; category: string }[]>([]);
   const { data: galleryData } = useGallery(1, 40); //new line to fetch gallery data from API
-  const gallery = galleryData?.items ?? []; //along with a fallback to an empty array if data is not available
+  const gallery = [...(galleryData?.items ?? []), ...localGallery]; //along with a fallback to an empty array if data is not available
   const { data: eventsData } = useEvents(1, 50);// new line to fetch events data from API
-  const events = eventsData?.items ?? localEvents;
+  const eventItems: Array<{
+    id?: number | null;
+    title?: string | null;
+    type?: string | null;
+    category?: string | null;
+    event_type?: string | null;
+    date?: string | null;
+    location?: string | null;
+    description?: string | null;
+    poster?: string | null;
+    coordinate?: string | null;
+    status?: string | null;
+  }> = eventsData?.items ?? localEvents;
+  const events: Event[] = eventItems.map((event) => ({
+    id: Number(event.id ?? Date.now()),
+    title: event.title ?? "Untitled event",
+    type: event.type ?? event.category ?? event.event_type ?? "Fieldwork",
+    date: event.date ?? "",
+    location: event.location ?? "",
+    description: event.description ?? "",
+    poster: event.poster ?? null,
+    coordinate: event.coordinate ?? "",
+    status: event.status ?? "Upcoming",
+  }));
 
   const [addEventOpen, setAddEventOpen] = useState(false);
   const [editEvent, setEditEvent] = useState<Event | null>(null);
@@ -277,7 +300,7 @@ function Index() {
 
   function handleAddPhoto() {
     if (!uploadPreview) return;
-    setGallery((prev) => [...prev, { id: Date.now(), src: uploadPreview, caption: uploadCaption || "Field record", tag: uploadTag || "fieldwork" }]);
+    setGallery((prev) => [...prev, { id: Date.now(), image_url: uploadPreview, caption: uploadCaption || "Field record", category: uploadTag || "fieldwork" }]);
     setUploadOpen(false); setUploadCaption(""); setUploadTag(""); setUploadPreview(null);
   }
 
@@ -324,7 +347,7 @@ function Index() {
         <section className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-12 lg:grid-cols-12 lg:px-8 lg:py-18">
           <div className="flex flex-col justify-center lg:col-span-5">
             <p className="anim-rise text-[11px] font-bold uppercase text-terracotta">Survey · Layer 01</p>
-            <h1 className="anim-rise mt-5 max-w-[11ch] font-display text-5xl font-extrabold leading-[0.96] sm:text-6xl lg:text-7xl [animation-delay:80ms]">We Plan for the Future</h1>
+            <h1 className="anim-rise mt-5 max-w-[11ch] font-display text-5xl font-extrabold leading-[0.96] sm:text-6xl lg:text-7xl [animation-delay:80ms]">We Plan for the Futuress</h1>
             <p className="anim-rise mt-6 max-w-[45ch] text-base leading-7 text-foreground/70 [animation-delay:160ms]">A collective of planners turning spatial knowledge into organized, inclusive and sustainable places under the Institute of Survey and Land Management.</p>
             <div className="anim-rise mt-8 flex flex-wrap gap-3 [animation-delay:240ms]">
               <Button asChild><a href="#gallery">Explore Gallery <ArrowDownRight size={17} /></a></Button>
