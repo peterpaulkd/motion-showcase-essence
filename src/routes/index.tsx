@@ -170,6 +170,58 @@ function CabinetSection() {
 
         {/* Dropdown for remaining members */}
         {extraMembers.length > 0 && (
+  <div className="relative mt-3">
+
+    <button
+      onClick={() => setDropdownOpen((v) => !v)}
+      className="flex w-full items-center justify-between rounded-md border-t border-border px-2 py-3 text-sm font-semibold"
+      aria-expanded={dropdownOpen}
+    >
+      <span>
+        {dropdownOpen ? "Hide" : "Show"}{" "}
+        {extraMembers.length} more members
+      </span>
+
+      {dropdownOpen ? <ChevronUp /> : <ChevronDown />}
+    </button>
+
+    {dropdownOpen && (
+      <div className="absolute left-0 top-full z-50 mt-2 w-full rounded-lg border border-border bg-background p-3 shadow-xl">
+
+        <div className="max-h-72 divide-y divide-border overflow-y-auto">
+
+          {extraMembers.map((member) => (
+            <div
+              key={member.id}
+              className="flex items-center gap-3 px-3 py-3"
+            >
+              {member.photo_url && (
+                <img
+                  src={member.photo_url}
+                  alt={member.full_name}
+                  className="h-10 w-10 shrink-0 rounded-full object-cover"
+                />
+              )}
+
+              <div>
+                <p className="text-sm font-semibold">
+                  {member.full_name}
+                </p>
+
+                <p className="text-xs text-terracotta">
+                  {member.position}
+                </p>
+              </div>
+            </div>
+          ))}
+
+        </div>
+      </div>
+    )}
+
+  </div>
+)}
+        {/* {extraMembers.length > 0 && (
           <div className="mt-3 border-t border-border pt-3">
             <button
               onClick={() => setDropdownOpen((v) => !v)}
@@ -208,7 +260,7 @@ function CabinetSection() {
               </div>
             )}
           </div>
-        )}
+        )} */}
       </div>
     </section>
   );
