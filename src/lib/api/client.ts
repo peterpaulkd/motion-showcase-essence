@@ -1,6 +1,6 @@
 // Base API client — reads token from localStorage and injects Bearer header
 
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+const API_BASE = (import.meta.env["VITE_API_URL"] as string) ?? "http://localhost:8000";
 
 export async function apiFetch<T>(
   path: string,

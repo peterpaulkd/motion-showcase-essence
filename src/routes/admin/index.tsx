@@ -188,8 +188,8 @@ function ConfirmDelete({
             Cancel
           </Button>
           <Button
-            variant="destructive"
-            className="flex-1"
+            variant="outline"
+            className="flex-1 border-destructive/40 text-destructive hover:bg-destructive/10 hover:border-destructive"
             onClick={onConfirm}
             disabled={loading}
           >
@@ -210,18 +210,29 @@ function EventsTab() {
   const deleteEvent = useDeleteEvent();
   const uploadCover = useUploadEventCover();
 
-  const emptyForm = {
+  type EventForm = {
+    title: string;
+    venue: string;
+    start_date: string;
+    end_date: string;
+    status: EventOut["status"];
+    description: string;
+    is_featured: boolean;
+    registration_link: string;
+  };
+
+  const emptyForm: EventForm = {
     title: "",
     venue: "",
     start_date: "",
     end_date: "",
-    status: "upcoming" as const,
+    status: "upcoming",
     description: "",
     is_featured: false,
     registration_link: "",
   };
 
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState<EventForm>(emptyForm);
   const [editId, setEditId] = useState<number | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
