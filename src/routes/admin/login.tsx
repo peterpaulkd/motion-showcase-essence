@@ -3,6 +3,7 @@ import { AlertCircle, ArrowRight, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
+import { GoogleLogin } from "@react-oauth/google";
 
 export const Route = createFileRoute("/admin/login")({
   component: AdminLogin,

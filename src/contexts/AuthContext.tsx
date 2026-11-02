@@ -28,6 +28,7 @@ interface AuthContextType {
   token: string | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  googleLogin: (credential: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -40,6 +41,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     () => localStorage.getItem("ppa_admin_token")
   );
   const [isLoading, setIsLoading] = useState(!!localStorage.getItem("ppa_admin_token"));
+
+  // new 2
+  const googleLogin = useCallback(async (credential: string) => {
+  const data = await apiFetch<TokenResponse>("/api/auth/google", {
+    method: "POST",
+    body: JSON.stringify({ credential }),
+  });
+
+  localStorage.setItem("ppa_admin_token", data.access_token);
+  localStorage.setItem("ppa_admin_refresh", data.refresh_token);
+
+  setToken(data.access_token);
+
+  const me = await apiFetch<UserOut>("/api/auth/me");
+  setUser(me);
+}, []);
 
   // On mount, if a token exists validate it by fetching /api/auth/me
   useEffect(() => {
@@ -86,6 +103,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isLoading,
         login,
         logout,
+        googleLogin,
         isAuthenticated: !!token && !!user,
       }}
     >

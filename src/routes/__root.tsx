@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, Link, createRootRouteWithContext, useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function NotFoundComponent() {
   return (
@@ -68,9 +69,13 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Outlet />
-      </AuthProvider>
+      <GoogleOAuthProvider
+  clientId={import.meta.env["VITE_GOOGLE_CLIENT_ID"]}
+>
+  <AuthProvider>
+    <Outlet />
+  </AuthProvider>
+</GoogleOAuthProvider>
     </QueryClientProvider>
   );
 }

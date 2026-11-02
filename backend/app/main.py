@@ -7,6 +7,11 @@ from app.core.config import settings
 from app.core.database import Base, engine
 from app.api.routes import auth, events, gallery, announcements, committee, dashboard
 
+# resolve circular import issue
+from app.api.routes import google_auth
+
+app.include_router(google_auth.router, prefix="/api")
+
 # Create tables
 Base.metadata.create_all(bind=engine)
 

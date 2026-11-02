@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDownRight, ArrowUpRight, Calendar, ChevronDown, ChevronUp, Github, Globe, Instagram, Lock, Mail, MapPin, Menu, Pencil, Plus, Trash2, Upload, X } from "lucide-react";
 import { type ChangeEvent, useEffect, useRef, useState } from "react";
 import { useCommittee } from "@/lib/api/hooks";
+import { useGallery } from "@/lib/api/hooks";
+import { useEvents } from "@/lib/api/hooks";
 
 import cabinetImage from "@/assets/ppa-cabinet.jpg";
 import districtImage from "@/assets/ppa-district.jpg";
@@ -204,7 +206,7 @@ function CabinetSection() {
 function Index() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [filter, setFilter] = useState("All");
-  const [events, setEvents] = useState<Event[]>(defaultEvents);
+  const [localEvents, setEvents] = useState<Event[]>(defaultEvents);
   const [adminUnlocked, setAdminUnlocked] = useState(false);
   const [adminInput, setAdminInput] = useState("");
   const [showAdminPrompt, setShowAdminPrompt] = useState(false);
@@ -214,7 +216,11 @@ function Index() {
   const [uploadCaption, setUploadCaption] = useState("");
   const [uploadTag, setUploadTag] = useState("");
   const [uploadPreview, setUploadPreview] = useState<string | null>(null);
-  const [gallery, setGallery] = useState<GalleryPhoto[]>([]);
+  // const [gallery, setGallery] = useState<GalleryPhoto[]>([]);
+  const { data: galleryData } = useGallery(1, 40); //new line to fetch gallery data from API
+  const gallery = galleryData?.items ?? []; //along with a fallback to an empty array if data is not available
+  const { data: eventsData } = useEvents(1, 50);// new line to fetch events data from API
+  const events = eventsData?.items ?? localEvents;
 
   const [addEventOpen, setAddEventOpen] = useState(false);
   const [editEvent, setEditEvent] = useState<Event | null>(null);
@@ -422,7 +428,7 @@ function Index() {
               <figcaption className="absolute inset-x-0 bottom-0 translate-y-1 bg-background/90 p-5 backdrop-blur transition-transform duration-300 group-hover:translate-y-0"><span className="text-[10px] uppercase text-foreground/50">National Cleaning Day</span>
               <p className="mt-1 font-display text-lg font-semibold">From contours to community</p></figcaption>
             </figure>
-            {gallery.map((photo, i) => (
+            {/* {gallery.map((photo, i) => (
               <figure key={photo.id} className={`reveal stagger-${Math.min(i + 1, 5)} group relative overflow-hidden rounded-lg md:col-span-${i % 2 === 0 ? "5" : "7"}`}>
                 <img src={photo.src} alt={photo.caption} className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"/>
                 <figcaption className="absolute inset-x-0 bottom-0 translate-y-1 bg-background/90 p-5 backdrop-blur transition-transform duration-300 group-hover:translate-y-0">
@@ -433,6 +439,27 @@ function Index() {
                   <button onClick={() => setGallery((prev) => prev.filter((p) => p.id !== photo.id))} className="absolute right-3 top-3 rounded-full bg-background/80 p-1.5 text-foreground/60 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100 hover:text-destructive"><Trash2 size={13} /></button>
                 )}
               </figure>
+            ))} */}
+            {gallery.map((photo, i) => (
+              <div key={photo.id} className="group">
+
+              <img
+                src={photo.image_url}
+                alt={photo.caption || "PPA activity"}
+                className="h-64 w-full rounded-lg object-cover"
+                loading="lazy"
+              />
+
+              <div className="mt-3">
+                <p className="font-semibold">
+                  {photo.caption || "Physical Planning Association Activity"}
+                </p>
+
+                <p className="text-xs text-foreground/50">
+                  {photo.category}
+                </p>
+              </div>
+            </div>
             ))}
           </div>
         </section>
