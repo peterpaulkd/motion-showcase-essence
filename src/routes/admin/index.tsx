@@ -254,8 +254,8 @@ function EventsTab() {
     setForm({
       title: ev.title,
       venue: ev.venue ?? "",
-      start_date: ev.start_date.split("T")[0],
-      end_date: ev.end_date ? ev.end_date.split("T")[0] : "",
+      start_date: ev.start_date.split("T")[0] ?? "",
+      end_date: ev.end_date ? (ev.end_date.split("T")[0] ?? "") : "",
       status: ev.status,
       description: ev.description ?? "",
       is_featured: ev.is_featured,
@@ -263,7 +263,7 @@ function EventsTab() {
     });
     setEditId(ev.id);
     setCoverFile(null);
-    setCoverPreview(ev.cover_image_url);
+    setCoverPreview(ev.cover_image_url ?? null);
     setApiError("");
     setFormOpen(true);
   }
@@ -1399,15 +1399,23 @@ function AnnouncementsTab() {
   const deleteAnn = useDeleteAnnouncement();
   const uploadCover = useUploadAnnouncementCover();
 
-  const emptyForm = {
+  type AnnForm = {
+    title: string;
+    content: string;
+    excerpt: string;
+    status: "draft" | "published";
+    is_featured: boolean;
+  };
+
+  const emptyForm: AnnForm = {
     title: "",
     content: "",
     excerpt: "",
-    status: "draft" as const,
+    status: "draft",
     is_featured: false,
   };
 
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState<AnnForm>(emptyForm);
   const [editId, setEditId] = useState<number | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
