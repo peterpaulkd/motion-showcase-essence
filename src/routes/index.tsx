@@ -93,9 +93,20 @@ function PlanningCanvas() {
 
 // Fallback members used when the API has no data yet
 const FALLBACK_MEMBERS = [
-  { id: 1, full_name: "Amina Noor", position: "President", bio: "Urban policy & governance", photo_url: null, email: null, order_index: 1, is_active: true },
-  { id: 2, full_name: "Daniel Mwangi", position: "Vice President", bio: "GIS & spatial analytics", photo_url: null, email: null, order_index: 2, is_active: true },
-  { id: 3, full_name: "Wanjiku Kamau", position: "General Secretary", bio: "Community planning", photo_url: null, email: null, order_index: 3, is_active: true },
+  { id: 1, full_name: "SSEBUNYA HANNINGTON JORDAN", position: "President", bio: "Urban policy & governance", photo_url: null, email: null, order_index: 1, is_active: true },
+  { id: 2, full_name: "KULABAKO MARY CLEDONIA ", position: "Vice President", bio: "GIS & spatial analytics", photo_url: null, email: null, order_index: 2, is_active: true },
+  { id: 3, full_name: "OKIRING MICHAEL", position: "General Secretary", bio: "Community planning", photo_url: null, email: null, order_index: 3, is_active: true },
+  { id: 4, full_name: "AWAL PIUS HERMAN ", position: "Speaker", bio: "Community planning", photo_url: null, email: null, order_index: 4, is_active: true },
+  { id: 5, full_name: "NIMUSIIMA PATRICIA ", position: "Deputy Speaker", bio: "Community planning", photo_url: null, email: null, order_index: 5, is_active: true },
+  { id: 6, full_name: "BASEKA IVAN ", position: "Treasurer", bio: "Community planning", photo_url: null, email: null, order_index: 6, is_active: true },
+  { id: 7, full_name: "ATUHAIRE BARBRA", position: "Secretary", bio: "Community planning", photo_url: null, email: null, order_index: 7, is_active: true },
+  { id: 8, full_name: "NAKIJOBA VICTORIA", position: "Deputy Secretary", bio: "Community planning", photo_url: null, email: null, order_index: 8, is_active: true },
+  { id: 9, full_name: "SAGALA ABDUL ", position: "Technical Minister", bio: "Community planning", photo_url: null, email: null, order_index: 3, is_active: true },
+  { id: 10, full_name: "TUMWINE POLLY", position: "Sports Minister", bio: "Community planning", photo_url: null, email: null, order_index: 3, is_active: true },
+  { id: 11, full_name: "NABYONGA ANGEL", position: "Project Coordinator", bio: "Community planning", photo_url: null, email: null, order_index: 3, is_active: true },
+  { id: 12, full_name: "SABAIDU ANTHONY", position: "Publicity Secretary", bio: "Community planning", photo_url: null, email: null, order_index: 3, is_active: true },
+  { id: 13, full_name: " HOPE MUZIGA", position: "Welfare Minister", bio: "Community planning", photo_url: null, email: null, order_index: 3, is_active: true },
+  { id: 14, full_name: " AKOL GRACE", position: "Certificate Representative", bio: "Community planning", photo_url: null, email: null, order_index: 3, is_active: true },
 ];
 
 function CabinetSection() {
@@ -347,7 +358,7 @@ function Index() {
         <section className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-12 lg:grid-cols-12 lg:px-8 lg:py-18">
           <div className="flex flex-col justify-center lg:col-span-5">
             <p className="anim-rise text-[11px] font-bold uppercase text-terracotta">Survey · Layer 01</p>
-            <h1 className="anim-rise mt-5 max-w-[11ch] font-display text-5xl font-extrabold leading-[0.96] sm:text-6xl lg:text-7xl [animation-delay:80ms]">We Plan for the Futuress</h1>
+            <h1 className="anim-rise mt-5 max-w-[11ch] font-display text-5xl font-extrabold leading-[0.96] sm:text-6xl lg:text-7xl [animation-delay:80ms]">We Plan for the Future</h1>
             <p className="anim-rise mt-6 max-w-[45ch] text-base leading-7 text-foreground/70 [animation-delay:160ms]">A collective of planners turning spatial knowledge into organized, inclusive and sustainable places under the Institute of Survey and Land Management.</p>
             <div className="anim-rise mt-8 flex flex-wrap gap-3 [animation-delay:240ms]">
               <Button asChild><a href="#gallery">Explore Gallery <ArrowDownRight size={17} /></a></Button>
