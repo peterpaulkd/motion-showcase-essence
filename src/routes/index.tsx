@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowDownRight, ArrowUpRight, Calendar, ChevronDown, ChevronUp, Github, Globe, Instagram, Lock, Mail, MapPin, Menu, Pencil, Plus, Trash2, Upload, X } from "lucide-react";
 import { type ChangeEvent, useEffect, useRef, useState } from "react";
 import { useCommittee } from "@/lib/api/hooks";
@@ -267,6 +267,7 @@ function CabinetSection() {
 }
 
 function Index() {
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [filter, setFilter] = useState("All");
   const [localEvents, setEvents] = useState<Event[]>(defaultEvents);
@@ -582,13 +583,25 @@ function Index() {
             {/* link to admin panel */}
             <div className="mt-6 border-t border-border/30 pt-4 text-center">
 
-  <a
-     href={`${import.meta.env.BASE_URL}admin/login`}
+
+  {/* <Link
+    to="/admin/login"
     className="inline-flex items-center gap-2 text-xs text-foreground/50 transition-colors hover:text-primary"
   >
     <Lock size={13} />
     Admin Panel
-  </a>
+  </Link> */}
+// Add import for Link from react-router-dom if missing
+{/* import { Link } from "react-router-dom"; */}
+
+<button
+  type="button"
+  onClick={() => navigate({ to: "/admin/login" })}
+  className="inline-flex items-center gap-2 text-xs text-foreground/50 transition-colors hover:text-primary"
+>
+  <Lock size={13} />
+  Admin Panel
+</button>
 
 </div>
 
